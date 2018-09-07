@@ -1,0 +1,35 @@
+package com.pangolinkeys.pangolin.components;
+
+import com.pangolinkeys.activities.AbstractActivity;
+import com.pangolinkeys.activities.MainActivity;
+import com.pangolinkeys.nasa.NasaService;
+import com.pangolinkeys.pangolin.modules.PangolinModule;
+import com.pangolinkeys.services.AbstractService;
+import dagger.Component;
+
+import javax.inject.Singleton;
+
+@Singleton
+@Component(modules = PangolinModule.class)
+public interface PangolinComponent {
+
+    /**
+     * @param activity
+     */
+    void inject(AbstractActivity activity);
+
+    /**
+     * @param activity
+     */
+    void inject(MainActivity activity);
+
+    /**
+     * @param service
+     */
+    void inject(AbstractService service);
+
+    /**
+     * @param service
+     */
+    void inject(NasaService service);
+}
