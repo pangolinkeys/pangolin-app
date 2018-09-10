@@ -1,7 +1,6 @@
 package com.pangolinkeys.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.pangolinkeys.nasa.NasaService;
@@ -13,6 +12,8 @@ import com.pangolinkeys.requests.contracts.ResponseHandler;
 import javax.inject.Inject;
 
 public class MainActivity extends AbstractActivity {
+
+    protected NeoResponse nearEarthObjects = null;
 
     @Inject
     NasaService nasaService;
@@ -26,10 +27,15 @@ public class MainActivity extends AbstractActivity {
         ((Pangolin) getApplicationContext()).getPangolinComponent().inject(this);
         nasaService.getNearEarthObjects(new ResponseHandler<NeoResponse>() {
             @Override
-            public void onComplete(NeoResponse response) {
-                test.setText(String.valueOf(response.near_earth_objects.length));
+            public void onComplete(NeoResponse nearEarthObjects) {
+                MainActivity.this.nearEarthObjects = nearEarthObjects;
+                requestsComplete();
             }
         });
+    }
+
+    protected void requestsComplete() {
+        this.test.setText(String.valueOf(this.nearEarthObjects.near_earth_objects.length));
     }
 
     @Override
