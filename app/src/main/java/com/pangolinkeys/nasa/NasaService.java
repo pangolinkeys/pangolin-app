@@ -17,12 +17,6 @@ import javax.inject.Inject;
 
 public class NasaService extends AbstractService {
 
-    @Inject
-    protected RequestQueue requestQueue;
-
-    @Inject
-    protected Gson gson;
-
     protected Application application;
     protected String apiRoot, apiKey;
 

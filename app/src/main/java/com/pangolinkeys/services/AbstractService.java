@@ -8,8 +8,14 @@ import com.pangolinkeys.pangolin.application.Pangolin;
 import javax.inject.Inject;
 
 public abstract class AbstractService {
-        
+
     protected Application application;
+
+    @Inject
+    protected RequestQueue requestQueue;
+
+    @Inject
+    protected Gson gson;
 
     public AbstractService(Application application) {
         this.application = application;

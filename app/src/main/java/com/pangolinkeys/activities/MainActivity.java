@@ -23,10 +23,11 @@ public class MainActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((Pangolin) getApplicationContext()).getPangolinComponent().inject(this);
         nasaService.getNearEarthObjects(new ResponseHandler<NeoResponse>() {
             @Override
             public void onComplete(NeoResponse response) {
-                test.setText(response.near_earth_objects[0].name);
+                test.setText(String.valueOf(response.near_earth_objects.length));
             }
         });
     }

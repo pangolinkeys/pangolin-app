@@ -21,7 +21,7 @@ public class Pangolin extends Application {
 
     private PangolinComponent createPangolinComponent() {
         return DaggerPangolinComponent.builder()
-//                .pangolinModule(new PangolinModule())
+                .pangolinModule(new PangolinModule(this))
                 .build();
     }
 }
