@@ -2,9 +2,9 @@ package com.pangolinkeys.pangolin.components;
 
 import com.pangolinkeys.activities.AbstractActivity;
 import com.pangolinkeys.activities.MainActivity;
-import com.pangolinkeys.nasa.NasaService;
+import com.pangolinkeys.nasa.request.NasaService;
 import com.pangolinkeys.pangolin.modules.PangolinModule;
-import com.pangolinkeys.services.AbstractService;
+import com.pangolinkeys.services.AbstractRequestService;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -26,7 +26,7 @@ public interface PangolinComponent {
     /**
      * @param service
      */
-    void inject(AbstractService service);
+    void inject(AbstractRequestService service);
 
     /**
      * @param service

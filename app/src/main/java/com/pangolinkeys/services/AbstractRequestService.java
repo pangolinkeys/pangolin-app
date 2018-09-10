@@ -7,7 +7,7 @@ import com.pangolinkeys.pangolin.application.Pangolin;
 
 import javax.inject.Inject;
 
-public abstract class AbstractService {
+public abstract class AbstractRequestService {
 
     protected Application application;
 
@@ -17,7 +17,7 @@ public abstract class AbstractService {
     @Inject
     protected Gson gson;
 
-    public AbstractService(Application application) {
+    public AbstractRequestService(Application application) {
         this.application = application;
         ((Pangolin) application).getPangolinComponent().inject(this);
     }

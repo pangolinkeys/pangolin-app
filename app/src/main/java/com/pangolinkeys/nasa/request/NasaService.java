@@ -1,21 +1,16 @@
-package com.pangolinkeys.nasa;
+package com.pangolinkeys.nasa.request;
 
 import android.app.Application;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
+import com.pangolinkeys.nasa.contracts.NasaServiceContract;
 import com.pangolinkeys.nasa.models.response.NeoResponse;
 import com.pangolinkeys.pangolin.R;
-import com.pangolinkeys.pangolin.application.Pangolin;
 import com.pangolinkeys.requests.contracts.ResponseHandler;
-import com.pangolinkeys.services.AbstractService;
+import com.pangolinkeys.services.AbstractRequestService;
 import org.json.JSONObject;
 
-import javax.inject.Inject;
-
-public class NasaService extends AbstractService {
+public class NasaService extends AbstractRequestService implements NasaServiceContract {
 
     protected Application application;
     protected String apiRoot, apiKey;

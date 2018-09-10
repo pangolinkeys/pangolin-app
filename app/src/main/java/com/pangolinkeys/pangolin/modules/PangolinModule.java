@@ -4,8 +4,9 @@ import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.pangolinkeys.nasa.NasaService;
-import com.pangolinkeys.pangolin.application.Pangolin;
+import com.pangolinkeys.nasa.cache.CachingNasaService;
+import com.pangolinkeys.nasa.contracts.NasaServiceContract;
+import com.pangolinkeys.nasa.request.NasaService;
 import dagger.Module;
 import dagger.Provides;
 
@@ -29,8 +30,8 @@ public class PangolinModule {
 
     @Provides
     @Singleton
-    public NasaService getNasaService(Application application) {
-        return new NasaService(application);
+    public NasaServiceContract getNasaService(Application application) {
+        return new CachingNasaService(new NasaService(application));
     }
 
     @Provides

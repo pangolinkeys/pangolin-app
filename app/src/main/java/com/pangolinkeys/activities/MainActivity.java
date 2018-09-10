@@ -3,7 +3,8 @@ package com.pangolinkeys.activities;
 import android.os.Bundle;
 import android.widget.TextView;
 import butterknife.BindView;
-import com.pangolinkeys.nasa.NasaService;
+import com.pangolinkeys.nasa.contracts.NasaServiceContract;
+import com.pangolinkeys.nasa.request.NasaService;
 import com.pangolinkeys.nasa.models.response.NeoResponse;
 import com.pangolinkeys.pangolin.R;
 import com.pangolinkeys.pangolin.application.Pangolin;
@@ -16,7 +17,7 @@ public class MainActivity extends AbstractActivity {
     protected NeoResponse nearEarthObjects = null;
 
     @Inject
-    NasaService nasaService;
+    NasaServiceContract nasaService;
 
     @BindView(R.id.test_text_view)
     TextView test;
