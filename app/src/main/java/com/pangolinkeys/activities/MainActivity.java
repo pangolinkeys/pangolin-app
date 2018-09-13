@@ -1,6 +1,7 @@
 package com.pangolinkeys.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.pangolinkeys.nasa.contracts.NasaServiceContract;
@@ -19,8 +20,8 @@ public class MainActivity extends AbstractActivity {
     @Inject
     NasaServiceContract nasaService;
 
-    @BindView(R.id.test_text_view)
-    TextView test;
+    @BindView(R.id.neo_recycler)
+    RecyclerView neoRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     protected void requestsComplete() {
-        this.test.setText(String.valueOf(this.nearEarthObjects.near_earth_objects.length));
+
     }
 
     @Override
