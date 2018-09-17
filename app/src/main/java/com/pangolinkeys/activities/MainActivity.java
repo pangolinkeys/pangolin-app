@@ -1,6 +1,7 @@
 package com.pangolinkeys.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -8,6 +9,7 @@ import com.pangolinkeys.nasa.contracts.NasaServiceContract;
 import com.pangolinkeys.nasa.request.NasaService;
 import com.pangolinkeys.nasa.models.response.NeoResponse;
 import com.pangolinkeys.pangolin.R;
+import com.pangolinkeys.pangolin.adapters.NearEarthObjectAdapter;
 import com.pangolinkeys.pangolin.application.Pangolin;
 import com.pangolinkeys.requests.contracts.ResponseHandler;
 
@@ -23,10 +25,14 @@ public class MainActivity extends AbstractActivity {
     @BindView(R.id.neo_recycler)
     RecyclerView neoRecycler;
 
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((Pangolin) getApplicationContext()).getPangolinComponent().inject(this);
+        setUpAdapters();
         nasaService.getNearEarthObjects(new ResponseHandler<NeoResponse>() {
             @Override
             public void onComplete(NeoResponse nearEarthObjects) {
@@ -37,7 +43,24 @@ public class MainActivity extends AbstractActivity {
     }
 
     protected void requestsComplete() {
+        bindAdapters();
+    }
 
+    /**
+     * Creates correct instances of adapters.
+     */
+    protected void setUpAdapters() {
+        layoutManager = new LinearLayoutManager(this);
+        neoRecycler.setLayoutManager(layoutManager);
+    }
+
+    /**
+     * Binds the data to the adapter.
+     */
+    protected void bindAdapters() {
+        neoRecycler.invalidate();
+        adapter = new NearEarthObjectAdapter(nearEarthObjects);
+        neoRecycler.setAdapter(adapter);
     }
 
     @Override
