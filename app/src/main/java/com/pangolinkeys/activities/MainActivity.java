@@ -31,7 +31,7 @@ public class MainActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((Pangolin) getApplicationContext()).getPangolinComponent().inject(this);
+        ((Pangolin) getApplication()).getPangolinComponent().inject(this);
         setUpAdapters();
         nasaService.getNearEarthObjects(new ResponseHandler<NeoResponse>() {
             @Override
