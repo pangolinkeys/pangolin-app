@@ -33,6 +33,9 @@ public class MainActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         ((Pangolin) getApplication()).getPangolinComponent().inject(this);
         setUpAdapters();
+
+        setTitle(getString(R.string.main_activity_title));
+
         nasaService.getNearEarthObjects(new ResponseHandler<NeoResponse>() {
             @Override
             public void onComplete(NeoResponse nearEarthObjects) {
@@ -59,7 +62,7 @@ public class MainActivity extends AbstractActivity {
      */
     protected void bindAdapters() {
         neoRecycler.invalidate();
-        adapter = new NearEarthObjectAdapter(nearEarthObjects);
+        adapter = new NearEarthObjectAdapter(nearEarthObjects, this);
         neoRecycler.setAdapter(adapter);
     }
 

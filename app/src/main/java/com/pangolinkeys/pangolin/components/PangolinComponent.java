@@ -2,6 +2,7 @@ package com.pangolinkeys.pangolin.components;
 
 import com.pangolinkeys.activities.AbstractActivity;
 import com.pangolinkeys.activities.MainActivity;
+import com.pangolinkeys.activities.NearEarthObjectActivity;
 import com.pangolinkeys.nasa.request.NasaService;
 import com.pangolinkeys.pangolin.modules.PangolinModule;
 import com.pangolinkeys.services.AbstractRequestService;
@@ -22,6 +23,11 @@ public interface PangolinComponent {
      * @param activity
      */
     void inject(MainActivity activity);
+
+    /**
+     * @param activity
+     */
+    void inject(NearEarthObjectActivity activity);
 
     /**
      * @param service

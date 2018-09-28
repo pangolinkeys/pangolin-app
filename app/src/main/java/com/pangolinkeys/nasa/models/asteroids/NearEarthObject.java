@@ -6,6 +6,7 @@ public class NearEarthObject {
             nasa_jpl_url,
             name;
     public double absolute_magnitude_h;
-    public boolean is_potentially_hazardous_asteroid;
+    public boolean is_potentially_hazardous_asteroid, is_sentry_object;
     public EstimatedDiameter estimated_diameter;
+    public CloseApproachData[] close_approach_data;
 }

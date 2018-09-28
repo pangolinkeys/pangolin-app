@@ -3,7 +3,9 @@ package com.pangolinkeys.nasa.request;
 import android.app.Application;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
 import com.pangolinkeys.nasa.contracts.NasaServiceContract;
+import com.pangolinkeys.nasa.models.asteroids.NearEarthObject;
 import com.pangolinkeys.nasa.models.response.NeoResponse;
 import com.pangolinkeys.pangolin.R;
 import com.pangolinkeys.requests.contracts.ResponseHandler;
@@ -12,7 +14,6 @@ import org.json.JSONObject;
 
 public class NasaService extends AbstractRequestService implements NasaServiceContract {
 
-    protected Application application;
     protected String apiRoot, apiKey;
 
     public NasaService(Application application) {
@@ -25,10 +26,26 @@ public class NasaService extends AbstractRequestService implements NasaServiceCo
      * @param handler
      */
     public void getNearEarthObjects(final ResponseHandler<NeoResponse> handler) {
-        requestQueue.add(new JsonObjectRequest(apiRoot + "neo/rest/v1/neo/browse?api_key=" + apiKey, null, new Response.Listener<JSONObject>() {
+        requestQueue.add(new JsonObjectRequest(apiRoot + "neo/rest/v1/neo/browse" + apiKey, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 handler.onComplete(gson.fromJson(response.toString(), NeoResponse.class));
+            }
+        }, null));
+    }
+
+    /**
+     * Get an individual Near Earth Object
+     *
+     * @param asteroidId
+     * @param handler
+     */
+    @Override
+    public void getNearEarthObject(String asteroidId, final ResponseHandler<NearEarthObject> handler) {
+        requestQueue.add(new JsonObjectRequest(apiRoot + "neo/rest/v1/neo/" + asteroidId + apiKey, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                handler.onComplete(gson.fromJson(response.toString(), NearEarthObject.class));
             }
         }, null));
     }

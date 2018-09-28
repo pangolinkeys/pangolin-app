@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pangolin</string>
+    <string name="main_activity_title">Near Earth Objects</string>
 </resources>

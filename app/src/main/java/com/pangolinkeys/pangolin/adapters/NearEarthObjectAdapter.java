@@ -1,13 +1,15 @@
 package com.pangolinkeys.pangolin.adapters;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.pangolinkeys.activities.MainActivity;
+import com.pangolinkeys.activities.NearEarthObjectActivity;
 import com.pangolinkeys.nasa.models.asteroids.NearEarthObject;
 import com.pangolinkeys.nasa.models.response.NeoResponse;
 import com.pangolinkeys.pangolin.R;
@@ -15,9 +17,15 @@ import com.pangolinkeys.pangolin.R;
 public class NearEarthObjectAdapter extends RecyclerView.Adapter<NearEarthObjectAdapter.NeoViewHolder> {
 
     protected NeoResponse response;
+    protected MainActivity parent;
 
-    public NearEarthObjectAdapter(NeoResponse response) {
+    /**
+     * @param response
+     * @param parent
+     */
+    public NearEarthObjectAdapter(NeoResponse response, MainActivity parent) {
         this.response = response;
+        this.parent = parent;
     }
 
     @NonNull
@@ -25,14 +33,13 @@ public class NearEarthObjectAdapter extends RecyclerView.Adapter<NearEarthObject
     public NeoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.neo_holder, parent, false);
-        NeoViewHolder vh = new NeoViewHolder(v);
-        return vh;
+        return new NeoViewHolder(v, this.parent);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NeoViewHolder holder, int position) {
         NearEarthObject object = getItemAtPosition(position);
-        ((TextView) holder.view.findViewById(R.id.tv_name)).setText(object.name);
+        holder.bindViewHolder(object);
     }
 
     @Override
@@ -45,11 +52,25 @@ public class NearEarthObjectAdapter extends RecyclerView.Adapter<NearEarthObject
     }
 
     public static class NeoViewHolder extends RecyclerView.ViewHolder {
-        public ConstraintLayout view;
+        protected ConstraintLayout view;
+        protected MainActivity parent;
 
-        public NeoViewHolder(ConstraintLayout view) {
+        public NeoViewHolder(ConstraintLayout view, MainActivity parent) {
             super(view);
             this.view = view;
+            this.parent = parent;
+        }
+
+        public void bindViewHolder(final NearEarthObject object) {
+            ((TextView) view.findViewById(R.id.tv_name)).setText(object.name);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(parent, NearEarthObjectActivity.class);
+                    intent.putExtra("asteroidId", object.neo_reference_id);
+                    parent.startActivity(intent);
+                }
+            });
         }
     }
 }

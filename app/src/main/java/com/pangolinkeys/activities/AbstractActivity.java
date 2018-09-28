@@ -1,13 +1,13 @@
 package com.pangolinkeys.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import com.pangolinkeys.pangolin.application.Pangolin;
 
-public abstract class AbstractActivity extends Activity {
+public abstract class AbstractActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,4 +22,5 @@ public abstract class AbstractActivity extends Activity {
      * @return
      */
     abstract protected int getContentView();
+
 }
